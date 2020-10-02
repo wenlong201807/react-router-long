@@ -3,7 +3,7 @@ import HashRouter from './HashRouter';
 import Route from './Route';
 import Link from './Link';
 // import Redirect from './Redirect';
-// import Switch from './Switch';
+import Switch from './Switch';
 // import withRouter from './withRouter';
 // import Prompt from './Prompt';
 export {
@@ -12,7 +12,7 @@ export {
     Route,
     Link,
     // Redirect,
-    // Switch,
+    Switch,
     // withRouter,
     // Prompt
 }
