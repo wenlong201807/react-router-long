@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>history-router</title>
+</head>
+<body>
+  <button onclick="goto('/a')">/a</button>
+  <button  onclick="goto('/b')">/b</button>
+  <div id="root"></div>
+  
+  <script>
+    function goto(path){
+       // 状态，路径，
+      history.pushState({path},path,path)
+    }
+
+    // 给window增加一个事件监听，监听popstate事件
+    // window.onpopstate = function(event){
+    //   console.log('onpopstate',event)
+    // }
+    // window.onpushstate = function(event){
+    //   console.log('onpushstate',event)
+    // }
+
+    // setTimeout(()=>{
+    //   history.pushState({page:1},'page1','/page1')
+    // },1000)
+
+    // setTimeout(()=>{
+    //   history.pushState({page:2},'page2','/page2')
+    // },2000)
+
+    // setTimeout(()=>{
+    //   history.pushState({page:3},'page3','/page3')
+    // },3000)
+
+    // setTimeout(()=>{
+    //   // history.pushState({page:1},'page4','/page4')
+    //   history.replaceState({page:4},'page4','/page4') 
+    // },4000)
+
+    // setTimeout(()=>{
+    //   // history.pushState({page:5},'page5','/page5')
+    //   history.back() // /page2
+    // },5000)
+
+    // setTimeout(()=>{
+    //   // history.pushState({page:5},'page5','/page5')
+    //   history.forward() // /page4
+    // },6000)
+  </script>
+</body>
+</html>

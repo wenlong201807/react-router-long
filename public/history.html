@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>history-router</title>
+</head>
+
+<body>
+  <button onclick="goto('/a')">/a</button>
+  <button onclick="goto('/b')">/b</button>
+  <div id="root"></div>
+
+  <script>
+    function goto(path) {
+      // 状态，路径，
+      history.pushState({
+        path
+      }, path, path)
+    }
+
+    //  给window增加一个事件监听，监听popstate事件
+    let root = document.getElementById('root')
+    // brower history不能刷新，如果刷新会把记录清空。
+    // 解决方案，需要配置后台重定向到指定路由上// 对应404的路径，都重定向到首页去
+    // 如此写法，保护变量
+    // (
+    //   function (history) {
+    //     let oldPushState = history.pushState
+    //     // 原生不支持，需要自定义实现
+    //     history.pushState = function (state, title, path) {
+    //       oldPushState.call(history, state, title, path) // 必须先调用老的状态
+    //       window.onpushstate && window.onpushstate(state, title, path)
+    //     }
+    //   }
+    // )(window.history)
+
+    // 修改止呕，history.length  会被影响到，注意这一点
+    let oldPushState = history.pushState
+    // 原生不支持，需要自定义实现
+    history.pushState = function (state, title, path) {
+      oldPushState.call(history, state, title, path) // 必须先调用老的状态
+      window.onpushstate && window.onpushstate(state, title, path)
+    }
+
+
+
+    window.onpopstate = window.onpushstate = function (event) {
+      console.log('onpopstate', event)
+      let pathname = location.pathname
+      if (pathname === '/a') {
+        root.innerHTML = '<h1>a页面</h1>'
+      } else if (pathname === '/b') {
+        root.innerHTML = '<h1>b页面</h1>'
+      }
+    }
+  </script>
+</body>
+
+</html>
